@@ -1,0 +1,14 @@
+{
+  "name": "codewars-practice",
+  "version": "1.0.0",
+  "author": "Sleaf <sleaf1996@qq.com>",
+  "description": "Algorism practice",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^23.6.0"
+  },
+  "license": "MIT",
+  "dependencies": {}
+}
