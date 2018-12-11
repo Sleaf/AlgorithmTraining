@@ -117,7 +117,59 @@ const solves = {
     rules[5] = numStr => awesomePhrases.map(i => String(i)).includes(numStr);
     const isFun = number => rules.some(rule => rule(String(number)));
     return isFun(number) ? 2 : isFun(number + 1) || isFun(number + 2) ? 1 : 0
-  }
+  },
+
+  /* https://www.codewars.com/kata/5765870e190b1472ec0022a2/train/javascript */
+  pathFinder(maze) {
+    let result = false;
+    const mazeArr = maze.split('\n').map(row => row.split(''));
+    const N = mazeArr.length;
+    const checked = Array(N).fill(null).map(_ => Array(N));
+    const isRoad = (x, y) => !!mazeArr[x] && mazeArr[x][y] === '.';
+    const putAround = (x, y) => {
+      if (result || (!!checked[x] && checked[x][y]) || !isRoad(x, y)) return;
+      checked[x][y] = true;
+      if (x === N - 1 && y === N - 1) {
+        result = true;
+        return;
+      }
+      putAround(x - 1, y);
+      putAround(x + 1, y);
+      putAround(x, y - 1);
+      putAround(x, y + 1);
+    };
+    putAround(0, 0);
+    return result;
+  },
+
+  /* https://www.codewars.com/kata/pyramid-slide-down/train/javascript */
+  longestSlideDown(pyramid) {
+    for (let i = pyramid.length - 2; i >= 0; i--) {
+      for (let j = 0; j <= i; j++) {
+        const cur = pyramid[i][j];
+        pyramid[i][j] = Math.max(cur + pyramid[i + 1][j], cur + pyramid[i + 1][j + 1]);
+      }
+    }
+    return pyramid[0][0];
+  },
+
+  /* https://www.codewars.com/kata/next-smaller-number-with-the-same-digits/train/javascript */
+  nextSmaller(n) {
+    const chars = n.toString().split('');
+    for (let i = chars.length - 1; i >= 0; i--) {
+      if (chars[i] < chars[i - 1]) {
+        if (chars[i] === '0' && i === 1) {
+          return -1;
+        }
+        return Object.keys({
+          ...chars,
+          [i - 1]: chars[i],
+          [i]: chars[i - 1]
+        }).join('');
+      }
+    }
+    return -1;
+  },
 };
 
 module.exports = solves;
