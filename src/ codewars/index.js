@@ -1,4 +1,4 @@
-const solves = {
+module.exports = {
   /* https://www.codewars.com/kata/55e7280b40e1c4a06d0000aa/train/javascript */
   chooseBestSum(t, k, ls) {
     var biggestCount = 0;
@@ -171,5 +171,3 @@ const solves = {
     return -1;
   },
 };
-
-module.exports = solves;
